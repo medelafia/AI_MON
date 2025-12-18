@@ -37,6 +37,16 @@ class CourseDBManager:
                 data.append(course)
             return data
 
+    def get_all_contains(self, search_key ) :
+        with dbconnection.db_connection(self.db_path) as cursor:
+            data = []
+            query = "SELECT * FROM course WHERE name LIKE '%' || :search || '%'"
+            cursor.execute(query , {"search" : search_key})
+
+            for row in cursor.fetchall():
+                course = Course(int(row[0]), row[1], row[2], row[3], int(row[4]))
+                data.append(course)
+            return data
     def add_course(self, course: Course):
         with dbconnection.db_connection(self.db_path, commit=True) as cursor:
             try:

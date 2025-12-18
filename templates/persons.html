@@ -8,16 +8,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css" integrity="sha512-Ez0cGzNzHR1tYAv56860NLspgUGuQw16GiOOp/I2LuTmpSK9xDXlgJz3XN4cnpXWDmkNBKXR/VDMTCnAaEooxA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body>
+<body class="bg-light">
     {% include "navbar.html" %}
     <div class="container p-5">
         <div class="d-flex align-items-center justify-content-between"> 
             <h1 class="text-primary">All students</h1>
             <a href='{{url_for("addPerson")}}' class="btn btn-outline-primary text-primary text-decoration-none">
-                    +
+                <i class="fa-solid fa-plus"></i>
             </a>
         </div>
-        <table class="table">
+        <table class="table table-light">
             <thead>
                 <tr>
                     <td>id</td>

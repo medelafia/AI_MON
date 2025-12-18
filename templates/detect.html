@@ -9,7 +9,8 @@
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css" integrity="sha512-Ez0cGzNzHR1tYAv56860NLspgUGuQw16GiOOp/I2LuTmpSK9xDXlgJz3XN4cnpXWDmkNBKXR/VDMTCnAaEooxA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body>
+<body class="bg-light">
+    {% include "navbar.html" %}
     <div class="d-flex align-items-center justify-content-center w-100 h-100 container py-5 flex-column">
         <img src="{{url_for('video_feed' , cam_role='detect' , course_id=course_id)}}" alt="" class="rounded border">
         <button class="btn btn-primary my-3">

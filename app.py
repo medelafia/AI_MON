@@ -3,7 +3,7 @@ from flask import Flask, render_template, Response , redirect , url_for , reques
 import time
 import numpy as np
 import face_recognition
-from Data.script import PersonDataManager , train , Person 
+from data.script import PersonDataManager , train , Person 
 from sklearn.neighbors import NearestNeighbors
 import os 
 import random
@@ -49,8 +49,8 @@ def convert_to_date_dict(data):
         
         if date not in result:
             result[date] = []
-        
-        result[date].append(personDbManager.get_person_by_id(person_id) )
+        person = personDbManager.get_person_by_id(person_id)
+        result[date].append(person if person else Person(  id='Not found' , name="Person not exist in student list , maybe he deleted" , age=0 , gender=None, role=None , embeddings=None))
     return result
 
 
@@ -140,7 +140,8 @@ def generate_frames( cam_role , person=None , course_id=None) :
 def index() : 
     alert_text = request.args.get("message", default="")
     alert_type = request.args.get("type", default="")
-    return render_template("index.html", courses=get_today_courses() ,  alert_text=alert_text, alert_type=alert_type )
+    image_url = url_for('static',filename="dha-ai-education-blog-1170x570.png")
+    return render_template("index.html", courses=get_today_courses() ,  alert_text=alert_text, alert_type=alert_type, main_image_url=image_url )
 
 
 @app.get("/detect")
@@ -243,8 +244,12 @@ def addPerson() :
 
 @app.get("/courses") 
 def show_courses() : 
-    courses = courseDbManager.get_all() 
-    return render_template("courses.html" , courses = courses )
+    course_name = request.args.get("course_name")
+    if course_name and course_name.strip() != "": 
+        courses = courseDbManager.get_all_contains(course_name)
+    else : 
+        courses = courseDbManager.get_all() 
+    return render_template("courses.html" , courses = courses , search_value=course_name)
 
 @app.get("/addCourse")
 def addCourse() : 
@@ -268,7 +273,7 @@ def attendance() :
     if course_id  : 
         attended_persons = attendanceDbManager.get_all_by_course_id(course_id)
         attended_persons_dict = convert_to_date_dict(attended_persons) 
-        return render_template("attendance.html" ,  data=attended_persons_dict)
+        return render_template("attendance.html" ,  data=attended_persons_dict , no_attendance=(len(attended_persons_dict) == 0))
     else :
         return redirect(url_for("index" , message="error" , type="danger"))
 if __name__ == "__main__":

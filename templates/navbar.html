@@ -12,26 +12,29 @@
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        {% if alert_text %}
-        <div class="p-3">
-            <div class="alert alert-{{alert_type}} alert-dismissible fade show" role="alert">
-                <strong>{% if alert_type == "success" %}success!{%else%} error!{%endif%}</strong> 
-                {{alert_text}}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<body >
+    <div class="bg-white border-bottom">
+        <div class="container">
+            {% if alert_text %}
+            <div class="p-3">
+                <div class="alert alert-{{alert_type}} alert-dismissible fade show" role="alert">
+                    <strong>{% if alert_type == "success" %}success!{%else%} error!{%endif%}</strong> 
+                    {{alert_text}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
             </div>
-        </div>
-        {% endif %}
-        <div class="d-flex align-items-center justify-content-between w-100 py-2">
-            <h1 class="text-center text-primary text-capitalize mt-3">Student Attendance System</h1>
-            <div class="d-flex align-items-center justify-content-between">
-                <a class="btn mx-1 "  href='{{url_for("index")}}'><i class="fa-solid fa-house"></i> home</a>
-                <a class="btn mx-1 " href='{{url_for("show_persons")}}'><i class="fa-solid fa-user"></i>persons</a>
-                <a class="btn mx-1" href='{{url_for("show_courses")}}'><i class="fa-solid fa-book"></i>courses</a>
-                <a class="btn mx-1" href='{{url_for("retrain")}}'><i class="fa-solid fa-retweet"></i> retrain</a>
+            {% endif %}
+            <div class="d-flex align-items-center justify-content-between w-100 py-2">
+                <h1 class="text-center text-primary text-capitalize mt-3">AI MON</h1>
+                <div class="d-flex align-items-center justify-content-between">
+                    <a class="btn mx-1 "  href='{{url_for("index")}}'><i class="fa-solid fa-house"></i> home</a>
+                    <a class="btn mx-1 " href='{{url_for("show_persons")}}'><i class="fa-solid fa-user"></i>persons</a>
+                    <a class="btn mx-1" href='{{url_for("show_courses")}}'><i class="fa-solid fa-book"></i>courses</a>
+                    <a class="btn mx-1" href='{{url_for("retrain")}}'><i class="fa-solid fa-retweet"></i> retrain</a>
+                </div>
             </div>
         </div>
     </div>
+    
 </body>
 </html>

@@ -28,7 +28,7 @@ class PersonDataManager:
         self.data = self.get_data()
     def get_data(self):
         self.data = []
-        tree = parse(os.path.join("./Model/" , "file.xml") ) 
+        tree = parse("./data/file.xml") 
         root = tree.getroot()
 
         faces = root.findall('Face') 

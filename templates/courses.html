@@ -7,48 +7,55 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css" integrity="sha512-Ez0cGzNzHR1tYAv56860NLspgUGuQw16GiOOp/I2LuTmpSK9xDXlgJz3XN4cnpXWDmkNBKXR/VDMTCnAaEooxA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .course-card:hover {
+            transform: scale(1.1);
+            transition: 100ms ease-in-out;
+        }
+
+    </style>
 </head>
-<body>
+<body class="bg-light">
     {% include "navbar.html" %}
     <div class="container p-5">
-        <div class="d-flex align-items-center justify-content-between"> 
-            <h1 class="text-primary">All Courses</h1>
-            <a href="{{url_for("addCourse")}}" class="btn btn-outline-primary text-primary text-decoration-none">
-                    +
-            </a>
+        <div class="d-flex justify-content-between"> 
+            <h1>Available Courses</h1>
+            <div class="d-flex align-items-center justify-content-between" >
+                <form action='{{url_for("show_courses")}}' class="d-flex align-items-center justify-content-between"> 
+                    <input value="{{search_value}}" type="text" placeholder="course name" name="course_name" class="form-control">
+                    <button type="submit" class="btn btn-primary me-3 ms-1"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+                <a href='{{url_for("addCourse")}}' class="btn btn-outline-primary text-primary text-decoration-none">
+                    <i class="fa-solid fa-plus"></i>
+                </a>
+            </div>
+            
         </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <td>id</td>
-                    <td>name</td>
-                    <td>day</td>
-                    <td>hour</td>
-                    <td>teacher id</td>
-                    <td>actions</td>
-                </tr>
-            </thead>
-            <tbody>
-                {%if courses %} 
-                    {% for course in courses %} 
-                    <tr>
-                        <td>{{course.id}}</td>
-                        <td>{{course.name}}</td>
-                        <td>{{course.day}}</td>
-                        <td>{{course.hour}}</td>
-                        <td>{{course.teacher_id}}</td>
-                        <td class="d-flex justify-content-center">
-                            <a class="btn text-decoration-none " href="{{url_for("attendance" , course_id=course.id)}}"><i class="fa-solid fa-calendar-days text-success btn" ></i></a>
-                        </td>
-                    </tr>
-                    {% endfor%}
+        <div class="row mt-3">
+            {%if courses %} 
+                {%for course in courses %} 
+                    <div class="col-md-4 col-lg-3 col-sm-12 p-2 course-card" >
+                        <div class="container border px-3 py-4 bg-white rounded" >
+                            <h4 class="text-capitalize mb-3">{{course.name}}</h4>
+
+                            <div><i class="fa-solid fa-person-chalkboard me-3"></i>mohamed el afia </div>
+                            <div><i class="fa-solid fa-clock me-3"></i>{{course.hour}} </div>
+                            <div><i class="fa-solid fa-calendar-days me-3"></i>{{course.day}} </div>
+                            <div class="d-flex align-items-center justify-content-end mt-3">
+                                <a class="btn btn-outline-primary text-decoration-none " href='{{url_for("attendance" , course_id=course.id)}}'>
+                                    check attendance
+                                    <i class="fa-solid fa-calendar-days" ></i>
+                                </a>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    {%endfor%}
                 {% else %} 
-                    <tr>
-                        <td colspan="6">no courses available</td>
-                    </tr>
+                    <div class="d-flex ali">no courses available</div>
                 {% endif %}
-            </tbody>
-        </table>
+        </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js" integrity="sha512-EKWWs1ZcA2ZY9lbLISPz8aGR2+L7JVYqBAYTq5AXgBkSjRSuQEGqWx8R1zAX16KdXPaCjOCaKE8MCpU0wcHlHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
