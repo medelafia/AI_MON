@@ -44,7 +44,7 @@ This is an AI-based Student Attendance System built with Flask that uses facial 
 
 📂 Sample XML Structure
 
-⁠ xml
+⁠```xml
 <Faces>
 	<Face>
 		<ID>
@@ -71,7 +71,7 @@ This is an AI-based Student Attendance System built with Flask that uses facial 
     </Face>
     ...
 <Faces>
-
+```
 ---
 
 📸 Frontend Features
