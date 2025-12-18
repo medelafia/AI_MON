@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css" integrity="sha512-Ez0cGzNzHR1tYAv56860NLspgUGuQw16GiOOp/I2LuTmpSK9xDXlgJz3XN4cnpXWDmkNBKXR/VDMTCnAaEooxA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    {% include "navbar.html" %}
+    <div class="container p-5">
+        <div class="d-flex align-items-center justify-content-between"> 
+            <h1 class="text-primary">All Courses</h1>
+            <a href="{{url_for("addCourse")}}" class="btn btn-outline-primary text-primary text-decoration-none">
+                    +
+            </a>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>id</td>
+                    <td>name</td>
+                    <td>day</td>
+                    <td>hour</td>
+                    <td>teacher id</td>
+                    <td>actions</td>
+                </tr>
+            </thead>
+            <tbody>
+                {%if courses %} 
+                    {% for course in courses %} 
+                    <tr>
+                        <td>{{course.id}}</td>
+                        <td>{{course.name}}</td>
+                        <td>{{course.day}}</td>
+                        <td>{{course.hour}}</td>
+                        <td>{{course.teacher_id}}</td>
+                        <td class="d-flex justify-content-center">
+                            <a class="btn text-decoration-none " href="{{url_for("attendance" , course_id=course.id)}}"><i class="fa-solid fa-calendar-days text-success btn" ></i></a>
+                        </td>
+                    </tr>
+                    {% endfor%}
+                {% else %} 
+                    <tr>
+                        <td colspan="6">no courses available</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js" integrity="sha512-EKWWs1ZcA2ZY9lbLISPz8aGR2+L7JVYqBAYTq5AXgBkSjRSuQEGqWx8R1zAX16KdXPaCjOCaKE8MCpU0wcHlHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html>
